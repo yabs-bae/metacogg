@@ -27,21 +27,11 @@ const usersSchema = new Schema(
     },
     coin: {
       type: Schema.Types.Number,
-      required: true,
-      unique: true,
+      default:0
     },
     picture: {
       type: Schema.Types.String,
-      required: true,
-      unique: true,
     },
-   
-    // role: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Role',
-    //   required: true,
-    //   index: true,
-    // },
   },
   {
     collection: 'users',

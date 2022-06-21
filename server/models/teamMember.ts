@@ -1,26 +1,29 @@
 import { ObjectId } from "mongodb";
 import mongoose, { Schema, Model, Document } from "mongoose";
 
-type TeamDocument = Document & {
-  name: string;
-  captainId: ObjectId;
-  logo: string;
-  tournamentId: ObjectId;
+
+export enum Role {
+  CAPTAIN = 'CAPTAIN',
+  MEMBER = 'MEMBER',
+  STANDIN = 'STANDIN',
+}
+
+type TeamMemberDocument = Document & {
+  userId: ObjectId;
+  teamId: ObjectId;
+  roles: Role;
+  ingameId: string;
 };
 
-type TeamInput = {
-  name: TeamDocument["name"];
-  captainId: TeamDocument["captainId"];
-  logo: TeamDocument["logo"];
-  tournamentId: TeamDocument["tournamentId"];
+type TeamMemberInput = {
+  userId: TeamMemberDocument["userId"];
+  teamId: TeamMemberDocument["teamId"];
+  roles: TeamMemberDocument["roles"];
+  ingameId: TeamMemberDocument["ingameId"];
 };
 
 const teamsSchema = new Schema(
   {
-    name: {
-      type: Schema.Types.String,
-      required: true,
-    },
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -36,8 +39,8 @@ const teamsSchema = new Schema(
     roles: {
       type: Schema.Types.String,
       required: true,
-      enum: ["CAPTAIN", "MEMBER", "STANDIN"],
-      default: "CAPTAIN",
+      enum: Role,
+      default: Role.CAPTAIN,
     },
     ingameId: {
       type: Schema.Types.String,
@@ -45,14 +48,14 @@ const teamsSchema = new Schema(
     },
   },
   {
-    collection: "teams",
+    collection: "teamMembers",
     timestamps: true,
   }
 );
 
-const Team: Model<TeamDocument> = mongoose.model<TeamDocument>(
-  "Team",
+const TeamMember: Model<TeamMemberDocument> = mongoose.model<TeamMemberDocument>(
+  "TeamMember",
   teamsSchema
 );
 
-export { Team, TeamInput, TeamDocument };
+export { TeamMember, TeamMemberInput, TeamMemberDocument };

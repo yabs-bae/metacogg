@@ -20,6 +20,7 @@ const teamsSchema = new Schema(
     name: {
       type: Schema.Types.String,
       required: true,
+      unique:true
     },
     captainId: {
       type: Schema.Types.ObjectId,
@@ -29,8 +30,6 @@ const teamsSchema = new Schema(
     },
     logo: {
       type: Schema.Types.String,
-      required: true,
-      unique: true,
     },
     tournamentId: {
         type: Schema.Types.ObjectId,
@@ -38,8 +37,6 @@ const teamsSchema = new Schema(
         required: true,
         index: true,
       },
-   
-    
   },
   {
     collection: 'teams',

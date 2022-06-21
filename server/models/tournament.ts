@@ -3,18 +3,18 @@ import mongoose, { Schema, Model, Document } from "mongoose";
 
 type TournamentDocument = Document & {
   title: string;
-  start_date: number;
-  end_date: number;
-  team_count: number;
+  startDate: Date;
+  endDate: Date;
+  teamCount: number;
   slot: number;
  
 };
 
 type TournamentInput = {
     title: TournamentDocument["title"];
-    start_date: TournamentDocument["start_date"];
-    end_date: TournamentDocument["end_date"];
-    team_count: TournamentDocument["team_count"];
+    startDate: TournamentDocument["startDate"];
+    endDate: TournamentDocument["endDate"];
+    teamCount: TournamentDocument["teamCount"];
     slot: TournamentDocument["slot"];
 };
 
@@ -24,15 +24,15 @@ const tournamentsSchema = new Schema(
       type: Schema.Types.String,
       required: true,
     },
-    start_date: {
-        type: Schema.Types.Number,
+    startDate: {
+        type: Schema.Types.Date,
         required: true,
     },
-    end_date: {
-        type: Schema.Types.Number,
+    endDate: {
+        type: Schema.Types.Date,
         required: true,
     },
-    team_count: {
+    teamCount: {
         type: Schema.Types.Number,
         required: true,
     },

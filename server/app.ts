@@ -1,5 +1,5 @@
 import express from 'express'// import our local router file
-import { userRoute } from './routes/user'// init express app
+import { appRoute } from './routes/routes'// init express app
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 });
 
 // route
-app.use('/', userRoute());
+app.use('/', appRoute());
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
